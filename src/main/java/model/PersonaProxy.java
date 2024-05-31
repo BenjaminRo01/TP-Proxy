@@ -11,10 +11,10 @@ public class PersonaProxy implements IPersona{
     private int idPersona;
     private PersonaDao personaDao;
 
-    public PersonaProxy(int idPersona, PersonaDao personaDao) {
+    public PersonaProxy(int idPersona, Persona persona, PersonaDao personaDao) {
         this.isTelefonosCargados = false;
         this.idPersona = idPersona;
-        this.persona = new Persona(idPersona,null, new HashSet<>());
+        this.persona = persona;
         this.personaDao = personaDao;
     }
 

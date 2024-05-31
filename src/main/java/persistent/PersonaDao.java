@@ -1,6 +1,8 @@
 package persistent;
 
+import model.IPersona;
 import model.Persona;
+import model.PersonaProxy;
 import model.Telefono;
 
 import java.sql.*;
@@ -10,14 +12,14 @@ import java.util.Set;
 public class PersonaDao {
     private static final String URL = "jdbc:mysql://localhost:3306/tp_proxy";
     private static final String SELECT_NOMBRE_PERSONA_ID = "SELECT nombre FROM personas WHERE personas.id = ?";
-    private static final String SELECT_TELEFONOS_PERSONA_ID = "SELECT personas.id, personas.nombre, telefonos.numero " +
+    private static final String SELECT_TELEFONOS_PERSONA_ID = "SELECT personas.nombre, telefonos.numero " +
                                                                 "FROM personas " +
                                                                 "JOIN telefonos ON personas.id = telefonos.idPersona " +
                                                                 "WHERE personas.id = ?";
     private Connection obtenerConexion() throws SQLException {
         return DriverManager.getConnection(URL, "root", "");
     }
-    public Persona personaPorId(int id) {
+    public IPersona personaPorId(int id) {
         try (Connection conn = obtenerConexion();
              PreparedStatement statement =
                      conn.prepareStatement(SELECT_NOMBRE_PERSONA_ID);) {
@@ -27,7 +29,7 @@ public class PersonaDao {
             while (result.next()) {
                 nombrePersona = result.getString(1);
             }
-            return new Persona(id, nombrePersona, new HashSet<>());
+            return new PersonaProxy(id, new Persona(id,nombrePersona,new HashSet<>()),this);
         } catch(SQLException e) {
             throw new RuntimeException(e);
         }
