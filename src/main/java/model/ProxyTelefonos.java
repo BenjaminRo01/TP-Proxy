@@ -25,9 +25,6 @@ public class ProxyTelefonos  implements Set<Telefono> {
             this.persona = new Persona(idPersona, null, this.telefonos);
             this.persona.telefonos();
         }
-        else {
-            this.persona.telefonos();
-        }
     }
 
     @Override
