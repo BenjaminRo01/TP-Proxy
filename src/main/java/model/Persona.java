@@ -2,7 +2,7 @@ package model;
 
 import java.util.Set;
 
-public class Persona {
+public class Persona implements IPersona{
     private int id;
     private String nombre;
     private Set<Telefono> telefonos;
