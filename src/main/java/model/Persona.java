@@ -5,7 +5,7 @@ import java.util.Set;
 public class Persona{
     private int id;
     private String nombre;
-    public Set<Telefono> telefonos;
+    private Set<Telefono> telefonos;
     public Persona(int id, String nombre, Set<Telefono> telefonos) {
         this.id = id;
         this.nombre = nombre;
